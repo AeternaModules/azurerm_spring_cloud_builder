@@ -1,3 +1,7 @@
+output "spring_cloud_builders_id" {
+  description = "Map of id values across all spring_cloud_builders, keyed the same as var.spring_cloud_builders"
+  value       = { for k, v in azurerm_spring_cloud_builder.spring_cloud_builders : k => v.id }
+}
 output "spring_cloud_builders_build_pack_group" {
   description = "Map of build_pack_group values across all spring_cloud_builders, keyed the same as var.spring_cloud_builders"
   value       = { for k, v in azurerm_spring_cloud_builder.spring_cloud_builders : k => v.build_pack_group }
