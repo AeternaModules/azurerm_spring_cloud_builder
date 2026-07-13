@@ -32,22 +32,6 @@ EOT
     ])
     error_message = "Each build_pack_group list must contain at least 1 items"
   }
-  validation {
-    condition = alltrue([
-      for k, v in var.spring_cloud_builders : (
-        length(v.stack.id) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
-  validation {
-    condition = alltrue([
-      for k, v in var.spring_cloud_builders : (
-        length(v.stack.version) > 0
-      )
-    ])
-    error_message = "must not be empty"
-  }
   # --- Unconfirmed validation candidates, derived from azurerm_spring_cloud_builder's provider source ---
   # Not auto-enabled: either a bespoke provider validator we can't safely translate,
   # or a path that crosses a list-typed block (needs its own for_each wrapping).
@@ -60,6 +44,12 @@ EOT
   #   condition: length(value) > 0
   #   message:   must not be empty
   # path: build_pack_group.build_pack_ids[*]
+  #   condition: length(value) > 0
+  #   message:   must not be empty
+  # path: stack.id
+  #   condition: length(value) > 0
+  #   message:   must not be empty
+  # path: stack.version
   #   condition: length(value) > 0
   #   message:   must not be empty
 }
